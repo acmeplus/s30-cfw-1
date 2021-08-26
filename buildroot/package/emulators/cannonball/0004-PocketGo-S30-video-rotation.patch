@@ -1,0 +1,38 @@
+diff --git a/src/main/sdl2/rendergles.cpp b/src/main/sdl2/rendergles.cpp
+index 6036375..70c722f 100644
+--- a/src/main/sdl2/rendergles.cpp
++++ b/src/main/sdl2/rendergles.cpp
+@@ -11,6 +11,8 @@
+ #include "rendergles.hpp"
+ #include "frontend/config.hpp"
+ 
++#define GL_BGRA_EXT 0x80E1
++
+ // Uncomment only for debugging purposes.
+ void gles_show_error();
+ #define	SHOW_ERROR //gles_show_error();
+@@ -268,7 +270,7 @@ bool RenderGLES::init(int src_width, int src_height,
+     glEnableVertexAttribArray(shader.a_texcoord); SHOW_ERROR
+ 
+     // Set the projection matrix
+-    SetOrtho(proj, -0.5f, +0.5f, +0.5f, -0.5f, -1.0f, 1.0f, 1, 1);
++    SetOrtho(proj, 0.5f, -0.5f, -0.5f, +0.5f, -1.0f, 1.0f, 1, 1);
+     
+     // Upload the projection matrix to the shader
+     glUniformMatrix4fv(shader.u_vp_matrix, 1, GL_FALSE, &proj[0][0]); SHOW_ERROR
+@@ -421,12 +423,11 @@ GLuint RenderGLES::CreateProgram(const char *vertex_shader_src, const char *frag
+ void RenderGLES::SetOrtho(float m[4][4], float left, float right, float bottom, float top, float near, float far, float scale_x, float scale_y)
+ {
+ 	memset(m, 0, 4*4*sizeof(float));
+-	m[0][0] = 2.0f/(right - left)*scale_x;
+-	m[1][1] = 2.0f/(top - bottom)*scale_y;
+-	m[2][2] = -2.0f/(far - near);
++
++	m[0][1] = -2.0f/(right - left)*scale_y;
++	m[1][0] = 0.8f/(top - bottom)*scale_x;
+ 	m[3][0] = -(right + left)/(right - left);
+ 	m[3][1] = -(top + bottom)/(top - bottom);
+-	m[3][2] = -(far + near)/(far - near);
+ 	m[3][3] = 1;
+ }
+ 

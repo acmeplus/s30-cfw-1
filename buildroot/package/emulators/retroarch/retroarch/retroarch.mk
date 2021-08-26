@@ -34,10 +34,6 @@ else
 	endif
 endif
 
-ifeq ($(BR2_PACKAGE_LIBDRM),y)
-	RETROARCH_CONF_OPTS += --enable-kms
-endif
-
 ifeq ($(BR2_ARM_FPU_NEON_VFPV4)$(BR2_ARM_FPU_NEON)$(BR2_ARM_FPU_NEON_FP_ARMV8),y)
     RETROARCH_CONF_OPTS += --enable-neon
 endif
