@@ -13,6 +13,12 @@ The following table summarizes the status of emulation/ports.
 | Daphne | Working correctly |
 | SDLPoP (Prince of Persia) | Working correctly |
 | DevilutionX (Diablo) | Working correctly |
+| OpenBOR | Versions 4432, 6330, 6412, & 6510 working correctly (may need some controls to be remapped) |
+| Vice | Not rendering correctly at this point (screen center is off) |
+| FBNeo | Currently working on initial support. Vertical games work correctly. Horizontal require some display center/resolution fixes |
+
+
+
 
 
 
