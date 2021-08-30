@@ -1,0 +1,25 @@
+diff --git a/posix/regcomp.c b/posix/regcomp.c
+index 871ae2f..54573f7 100644
+--- a/posix/regcomp.c
++++ b/posix/regcomp.c
+@@ -927,12 +927,14 @@  init_word_char (re_dfa_t *dfa)
+     {
+       if (sizeof (dfa->word_char[0]) == 8)
+ 	{
+-          /* The extra temporaries here avoid "implicitly truncated"
++          /* The conditionals here avoid "implicitly truncated"
+              warnings in the case when this is dead code, i.e. 32-bit.  */
+-          const uint64_t wc0 = UINT64_C (0x03ff000000000000);
+-          const uint64_t wc1 = UINT64_C (0x07fffffe87fffffe);
+-	  dfa->word_char[0] = wc0;
+-	  dfa->word_char[1] = wc1;
++	  dfa->word_char[0] = (sizeof (dfa->word_char[0]) == 8
++			       ? UINT64_C (0x03ff000000000000)
++			       : 0);
++	  dfa->word_char[1] = (sizeof (dfa->word_char[0]) == 8
++			       ? UINT64_C (0x07fffffe87fffffe)
++			       : 0);
+ 	  i = 2;
+ 	}
+       else if (sizeof (dfa->word_char[0]) == 4)
+

@@ -9,7 +9,7 @@ GLIBC_SITE = $(BR2_GNU_MIRROR)/libc
 GLIBC_SOURCE = glibc-$(GLIBC_VERSION).tar.xz
 GLIBC_SRC_SUBDIR = .
 
-GLIBC_LICENSE = GPLv2+ (programs), LGPLv2.1+, BSD-3c, MIT (library)
+GLIBC_LICENSE = GPL-2.0+ (programs), LGPL-2.1+, BSD-3-Clause, MIT (library)
 GLIBC_LICENSE_FILES = $(addprefix $(GLIBC_SRC_SUBDIR)/,COPYING COPYING.LIB LICENSES)
 
 # glibc is part of the toolchain so disable the toolchain dependency
@@ -43,6 +43,12 @@ endif
 ifeq ($(BR2_ENABLE_DEBUG),y)
 GLIBC_EXTRA_CFLAGS += -g
 endif
+
+# FIXME: Temporary patch to disable the compilation errors
+# that happen when we compile GLIBC2.23 with GCC > 6.X
+# Many of these error warnings were added in GCC 7.X
+GLIBC_EXTRA_CFLAGS += -Wno-error=missing-attributes -Wno-error=array-bounds -Wno-error=switch-unreachable -Wno-error=format-overflow -Wno-error=stringop-truncation
+GLIBC_EXTRA_CFLAGS += -Wno-error=format-truncation -Wno-error=restrict
 
 # The stubs.h header is not installed by install-headers, but is
 # needed for the gcc build. An empty stubs.h will work, as explained
@@ -94,24 +100,23 @@ define GLIBC_CONFIGURE_CMDS
 	$(GLIBC_ADD_MISSING_STUB_H)
 endef
 
-
 #
 # We also override the install to target commands since we only want
 # to install the libraries, and nothing more.
 #
 
 GLIBC_LIBS_LIB = \
-	ld*.so.* libc.so.* libcrypt.so.* libdl.so.* libgcc_s.so.* libm.so.*        \
-	libnsl.so.* libpthread.so.* libresolv.so.* librt.so.* libutil.so.*   \
-	libnss_files.so.* libnss_dns.so.* libmvec.so.*
+	ld*.so.* libanl.so.* libc.so.* libcrypt.so.* libdl.so.* libgcc_s.so.* \
+	libm.so.* libnsl.so.* libpthread.so.* libresolv.so.* librt.so.* \
+	libutil.so.* libnss_files.so.* libnss_dns.so.* libmvec.so.*
 
 ifeq ($(BR2_PACKAGE_GDB),y)
 GLIBC_LIBS_LIB += libthread_db.so.*
 endif
 
 define GLIBC_INSTALL_TARGET_CMDS
-	for libs in $(GLIBC_LIBS_LIB); do \
-		$(call copy_toolchain_lib_root,$$libs) ; \
+	for libpattern in $(GLIBC_LIBS_LIB); do \
+		$(call copy_toolchain_lib_root,$$libpattern) ; \
 	done
 endef
 
