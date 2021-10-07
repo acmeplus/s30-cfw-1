@@ -1,0 +1,2 @@
+source "package/emulators/easyrpg/easyrpg-player/Config.in"
+source "package/emulators/easyrpg/liblcf/Config.in"

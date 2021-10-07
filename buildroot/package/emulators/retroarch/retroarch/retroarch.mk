@@ -4,7 +4,7 @@
 #
 ################################################################################
 # Version.: Release on May 29, 2021
-RETROARCH_VERSION = v1.9.8
+RETROARCH_VERSION = v1.9.10
 RETROARCH_SITE = $(call github,libretro,RetroArch,$(RETROARCH_VERSION))
 RETROARCH_LICENSE = GPLv3+
 RETROARCH_DEPENDENCIES = host-pkgconf dejavu flac
@@ -13,6 +13,9 @@ RETROARCH_INSTALL_STAGING = YES
 
 RETROARCH_CONF_OPTS = --disable-oss --enable-zlib --disable-qt --enable-threads --enable-ozone --enable-xmb --disable-discord
 RETROARCH_CONF_OPTS += --enable-flac --enable-lua --enable-networking --enable-translate --enable-rgui --disable-cdrom
+RETROARCH_CONF_OPTS += --enable-mali_fbdev
+
+RETROARCH_TARGET_CFLAGS += -DPOCKETGOS30
 
 ifeq ($(BR2_PACKAGE_FFMPEG),y)
 	RETROARCH_CONF_OPTS += --enable-ffmpeg

@@ -114,11 +114,16 @@ deps_config := \
 	package/emulationstation/batocera-emulationstation/Config.in \
 	package/emulationstation/Config.in \
 	package/emulators/yuzu/Config.in \
+	package/emulators/xemu/Config.in \
 	package/emulators/vice/Config.in \
+	package/emulators/tsugaru/Config.in \
 	package/emulators/supermodel/Config.in \
 	package/emulators/soniccd/Config.in \
 	package/emulators/sonic2013/Config.in \
+	package/emulators/solarus-engine/Config.in \
+	package/emulators/sdlpop/Config.in \
 	package/emulators/scummvm/Config.in \
+	package/emulators/ruffle/Config.in \
 	package/emulators/rpcs3/Config.in \
 	package/emulators/retroarch/shaders/slang-shaders/Config.in \
 	package/emulators/retroarch/shaders/glsl-shaders/Config.in \
@@ -210,7 +215,9 @@ deps_config := \
 	package/emulators/retroarch/libretro/Config.in \
 	package/emulators/retroarch/batocera-bezel/Config.in \
 	package/emulators/retroarch/Config.in \
+	package/emulators/redream/Config.in \
 	package/emulators/python-pygame2/Config.in \
+	package/emulators/ppsspp15/Config.in \
 	package/emulators/ppsspp/Config.in \
 	package/emulators/pcsx2_avx2/Config.in \
 	package/emulators/pcsx2/Config.in \
@@ -235,19 +242,32 @@ deps_config := \
 	package/emulators/melonds/Config.in \
 	package/emulators/mame/Config.in \
 	package/emulators/linapple/Config.in \
+	package/emulators/lightspark/Config.in \
 	package/emulators/hatari/Config.in \
+	package/emulators/gsplus/Config.in \
 	package/emulators/fsuae/Config.in \
+	package/emulators/fpinball/Config.in \
+	package/emulators/flycast/Config.in \
+	package/emulators/easyrpg/liblcf/Config.in \
+	package/emulators/easyrpg/easyrpg-player/Config.in \
+	package/emulators/easyrpg/Config.in \
 	package/emulators/duckstation/Config.in \
+	package/emulators/drastic/Config.in \
+	package/emulators/dosbox-x/Config.in \
+	package/emulators/dosbox-staging/Config.in \
+	package/emulators/dosbox/Config.in \
 	package/emulators/dolphin-emu/Config.in \
 	package/emulators/devilutionx/Config.in \
 	package/emulators/daphne/Config.in \
 	package/emulators/citra/Config.in \
+	package/emulators/cgenius/Config.in \
 	package/emulators/cemu/cemutil/Config.in \
 	package/emulators/cemu/cemu-hook/Config.in \
 	package/emulators/cemu/cemu/Config.in \
 	package/emulators/cemu/Config.in \
 	package/emulators/cannonball/Config.in \
 	package/emulators/amiberry/Config.in \
+	package/emulators/advancemame/Config.in \
 	package/emulators/Config.in \
 	package/vim/Config.in \
 	package/uemacs/Config.in \
@@ -1176,6 +1196,7 @@ deps_config := \
 	package/tremor/Config.in \
 	package/tinyalsa/Config.in \
 	package/taglib/Config.in \
+	package/speexdsp/Config.in \
 	package/speex/Config.in \
 	package/sbc/Config.in \
 	package/portaudio/Config.in \
@@ -1184,6 +1205,7 @@ deps_config := \
 	package/opencore-amr/Config.in \
 	package/openal/Config.in \
 	package/mp4v2/Config.in \
+	package/libxmp/Config.in \
 	package/libvorbis/Config.in \
 	package/libsoxr/Config.in \
 	package/libsoundtouch/Config.in \
@@ -2838,7 +2860,7 @@ endif
 ifneq "$(HOSTARCH)" "x86_64"
 /opt/data/s30/dev/github/acmeplus/s30-cfw-1/buildroot/output/build/buildroot-config/auto.conf: FORCE
 endif
-ifneq "$(BR2_VERSION_FULL)" "2018.02-rc3-g815048de-dirty"
+ifneq "$(BR2_VERSION_FULL)" "2018.02-rc3-g42170de4-dirty"
 /opt/data/s30/dev/github/acmeplus/s30-cfw-1/buildroot/output/build/buildroot-config/auto.conf: FORCE
 endif
 

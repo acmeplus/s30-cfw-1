@@ -3,8 +3,8 @@
 # DosBox Staging
 #
 ################################################################################
-# Version.: Release on July 02, 2021
-DOSBOX_STAGING_VERSION = v0.77.0
+# Version.: Release on Aug 28, 2021
+DOSBOX_STAGING_VERSION = v0.77.1
 DOSBOX_STAGING_SITE = $(call github,dosbox-staging,dosbox-staging,$(DOSBOX_STAGING_VERSION))
 DOSBOX_STAGING_DEPENDENCIES = sdl2 sdl2_net zlib libpng libogg libvorbis opus opusfile fluidsynth
 DOSBOX_STAGING_LICENSE = GPLv2
@@ -19,7 +19,7 @@ DOSBOX_STAGING_CFLAGS   += -mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard
 DOSBOX_STAGING_CXXFLAGS += -mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard
 DOSBOX_STAGING_CONF_OPTS += -Duse_opengl=false
 endif
-ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_RPI2),y)
+ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_RPI2)$(BR2_PACKAGE_BATOCERA_TARGET_ORANGEPI_PC)$(BR2_PACKAGE_BATOCERA_TARGET_CHA),y)
 DOSBOX_STAGING_CFLAGS   += -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
 DOSBOX_STAGING_CXXFLAGS += -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
 DOSBOX_STAGING_CONF_OPTS += -Duse_opengl=false
@@ -56,18 +56,23 @@ DOSBOX_STAGING_CXXFLAGS += -march=armv8-a+crc -mcpu=cortex-a73 -mtune=cortex-a73
 DOSBOX_STAGING_CONF_OPTS += -Duse_opengl=false
 endif
 ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_XU4),y)
-DOSBOX_STAGING_CFLAGS   += -mcpu=cortex-a15 -mfpu=neon-vfpv4 -mfpu=neon-vfpv4 -mfloat-abi=hard
-DOSBOX_STAGING_CXXFLAGS += -mcpu=cortex-a15 -mfpu=neon-vfpv4 -mfpu=neon-vfpv4 -mfloat-abi=hard
+DOSBOX_STAGING_CFLAGS   += -mcpu=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=hard
+DOSBOX_STAGING_CXXFLAGS += -mcpu=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=hard
 DOSBOX_STAGING_CONF_OPTS += -Duse_opengl=false
 endif
 ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_RK3288),y)
-DSOBOX_STAGING_CFLAGS   += -marm -march=armv7-a -mtune=cortex-a17 -mfpu=neon-vfpv4 -mfloat-abi=hard
-DSOBOX_STAGING_CXXFLAGS += -marm -march=armv7-a -mtune=cortex-a17 -mfpu=neon-vfpv4 -mfloat-abi=hard
+DOSBOX_STAGING_CFLAGS   += -marm -march=armv7-a -mtune=cortex-a17 -mfpu=neon-vfpv4 -mfloat-abi=hard
+DOSBOX_STAGING_CXXFLAGS += -marm -march=armv7-a -mtune=cortex-a17 -mfpu=neon-vfpv4 -mfloat-abi=hard
 DOSBOX_STAGING_CONF_OPTS += -Duse_opengl=false
 endif
 ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_RK3326_ANY),y)
 DOSBOX_STAGING_CFLAGS   += -march=armv8-a+crc -mtune=cortex-a55
 DOSBOX_STAGING_CXXFLAGS += -march=armv8-a+crc -mtune=cortex-a55
+DOSBOX_STAGING_CONF_OPTS += -Duse_opengl=false
+endif
+ifeq ($(BR2_PACKAGE_BATOCERA_TARGET_S812),y)
+DOSBOX_STAGING_CFLAGS   += -marm -march=armv7-a -mtune=cortex-a9 -mfpu=neon-vfpv3 -mfloat-abi=hard
+DOSBOX_STAGING_CXXFLAGS += -marm -march=armv7-a -mtune=cortex-a9 -mfpu=neon-vfpv3 -mfloat-abi=hard
 DOSBOX_STAGING_CONF_OPTS += -Duse_opengl=false
 endif
 
